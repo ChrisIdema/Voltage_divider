@@ -7,8 +7,8 @@ using namespace std;
 *(c)2010 Chris Idema
 *Dit programma berekend de weerstanden R1 en R2
 *van een spanningsdeler. Omdat er bij de meeste
-*delers veel mogelijke waarden zijn én er maar
-*één de beste kan zijn, is het handig die te
+*delers veel mogelijke waarden zijn Ã©n er maar
+*Ã©Ã©n de beste kan zijn, is het handig die te
 *weten. Dit zelf uitrekenen kost veel werk.
 **********************************************/
 
@@ -87,7 +87,7 @@ int main() {
 	dan is er geen spanningsdeler. Is de polariteit van de uitgang ongelijk aan de ingang,
 	dan is er geen spanningsdeler. Als de uitgang of de ingang 0 voltia,  zijn er oneindig veel delers mogelijk.
 	*/
-	if ((fabs(Uo) >= fabs(Ui)) | ((Ui >= 0) != (Uo >= 0)) | (Ui == 0) | (Uo == 0)) {
+	if ((fabs(Uo) >= fabs(Ui)) || ((Ui >= 0) != (Uo >= 0)) || (Ui == 0) || (Uo == 0)) {
 		cout << "Error! No voltage divider possible with given values.";
 	}
 	else {
