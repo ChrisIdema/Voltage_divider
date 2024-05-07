@@ -43,7 +43,36 @@ def find_R2(R1, ratio, series):
 
 
 
-if __name__ == "__main__":
+# for m in (12,24,48,96,192):
+# 	print(f"E{m} series")
+# 	digits = 1 if m <= 24 else 2
+# 	series = [round((10**n)**(1/m), digits) for n in range(0,m)]
+
+# 	if m <= 24:
+# 		series = [s+0.1 if s in (2.6,2.9,3.2,3.5,3.8,4.2,4.6) else s for s in series]
+# 		series = [s-0.1 if s in (8.3,) else s for s in series]
+# 	print(series)
+
+for m in (12,24,48,96,192):
+	print(f"E{m} series")
+	digits = 1 if m <= 24 else 2
+	if m <= 24:
+		series = [round((10**n)**(1/m)*10)*10 for n in range(0,m)]
+	else:
+		series = [round((10**n)**(1/m)*100) for n in range(0,m)]
+
+	if m <= 24:
+		series = [s+10 if s in (260,290,320,350,380,420,460) else s for s in series]
+		series = [s-10 if s in (830,) else s for s in series]
+
+	if m <= 192:
+		series = [s+1 if s in (919,) else s for s in series]
+
+	print([f"{s/100:.2f}" for s in series])
+
+
+
+if __name__ == "__main__f":
 
 	ascii_art = '''RVDC V2.0 ©2024 Chris Idema
 Ui O-------.
@@ -71,7 +100,7 @@ GND      --+--
 	#print(find_R2(1, 5.0/3.3, E_12))
  
 	Ui = 5.0
-	Uo = 3.3
+	Uo = 0.33
 
 	print(f"Ui: {Ui}")
 	print(f"Uo: {Uo}")
@@ -97,7 +126,7 @@ GND      --+--
 			R1 = r / 100 #begin met 1 ohm
 			R2 = find_R2(R1, ratio, E_24)
 			afwijking = (Ui*R1 / (R1 + R2) / Uo - 1) * 100
-			print(f"R1: {R1} ohm\tR2: {R2:3f} ohm\tUo: {Ui*R1 / (R1 + R2):4f}\terror: {afwijking:5.2f} %")
+			print(f"R1: {R1:3g} ohm\tR2: {R2:3g} ohm\tUo: {Ui*R1 / (R1 + R2):4g}\terror: {afwijking:5.2f} %")
 
 			if abs(afwijking) < abs(beste_afwijking) or first:
 				beste_afwijking = afwijking
@@ -114,7 +143,7 @@ GND      --+--
 			R1 = r / 100 #begin met 1 ohm
 			R2 = find_R2(R1, ratio, E_12)
 			afwijking = (Ui*R1 / (R1 + R2) / Uo - 1) * 100
-			print(f"R1: {R1} ohm\tR2: {R2:2f} ohm\tUo: {Ui*R1 / (R1 + R2):4f}\terror: {afwijking:5.2f} %")
+			print(f"R1: {R1:3g} ohm\tR2: {R2:3g} ohm\tUo: {Ui*R1 / (R1 + R2):4g}\terror: {afwijking:5.2f} %")
 
 			if abs(afwijking) < abs(beste_afwijking) or first:
 				beste_afwijking = afwijking
